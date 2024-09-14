@@ -1,0 +1,33 @@
+# Ambiente virtual
+*venv*/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos e pastas do IDE
+.vscode/
+.idea/
+*.swp
+
+# Arquivos de configuração do sistema
+*.DS_Store
+*.env
+
+# Arquivos de build e distribuição
+dist/
+build/
+*.egg
+*.egg-info/
+*.eggs/
+
+# Teste de cobertura
+.coverage
+*.cover
+
+# Logs
+*.log
+
+# Outros arquivos temporários
+*.tmp
