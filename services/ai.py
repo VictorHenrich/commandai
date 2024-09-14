@@ -1,5 +1,10 @@
-
-from speech_recognition import Microphone, Recognizer, AudioData, UnknownValueError, RequestError
+from speech_recognition import (
+    Microphone,
+    Recognizer,
+    AudioData,
+    UnknownValueError,
+    RequestError,
+)
 import logging
 
 
@@ -16,10 +21,12 @@ class AiService:
 
                 audio_data: AudioData = cls.__recognizer.listen(source)
 
-                return cls.__recognizer.recognize_google_cloud(audio_data, language="pt-BR")
-            
+                return cls.__recognizer.recognize_google_cloud(
+                    audio_data, language="pt-BR"
+                )
+
             except UnknownValueError:
                 raise Exception("Unable to understand the audio!")
-            
+
             except RequestError:
                 raise Exception("Failed to communicate with recognizer!")
