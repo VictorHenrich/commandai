@@ -1,0 +1,28 @@
+from dotenv import load_dotenv
+
+
+async def main() -> None:
+    from core.instances import AppInstances
+    from services.ai import AiService
+    from utils.serializers import WitIntegrationSerializer
+
+    try:
+        while True:
+            voice_data: str = await AiService.async_capture_microphone_data()
+
+            wit_integration: WitIntegrationSerializer = AiService.integrate_with_wit(
+                voice_data
+            )
+
+            AppInstances.event.emit(
+                wit_integration.event_name, wit_integration.event_data
+            )
+
+    except InterruptedError:
+        quit()
+
+
+if __name__ == "__main__":
+    load_dotenv()
+
+    main()

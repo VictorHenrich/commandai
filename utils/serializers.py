@@ -1,3 +1,4 @@
+from typing import Dict, Any
 from pydantic import BaseModel, field_validator
 
 
@@ -33,3 +34,9 @@ class VolumeMuteSerializer(BaseModel):
     @field_validator("mute", mode="before")
     def set_mute_as_integer(cls, value: bool) -> int:
         return 1 if value else 0
+
+
+class WitIntegrationSerializer(BaseModel):
+    event_name: str
+
+    event_data: Dict[str, Any]
