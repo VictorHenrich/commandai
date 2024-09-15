@@ -52,7 +52,7 @@ class AiService:
         async with httpx.AsyncClient(
             headers={"Authorization": f"Bearer {WIT_SECRET_KEY}"}
         ) as client:
-            response: httpx.Response = client.get(
+            response: httpx.Response = await client.get(
                 wit_url, params=query_params, timeout=10
             )
 
