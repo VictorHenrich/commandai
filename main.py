@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+import asyncio
 
 
 async def main() -> None:
@@ -10,7 +11,7 @@ async def main() -> None:
         while True:
             voice_data: str = await AiService.async_capture_microphone_data()
 
-            wit_integration: WitIntegrationSerializer = AiService.integrate_with_wit(
+            wit_integration: WitIntegrationSerializer = await AiService.integrate_with_wit(
                 voice_data
             )
 
@@ -25,4 +26,4 @@ async def main() -> None:
 if __name__ == "__main__":
     load_dotenv()
 
-    main()
+    asyncio.run(main())
