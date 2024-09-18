@@ -10,28 +10,28 @@ from utils.serializers import (
 
 
 @AppInstances.event.on("increase_volume")
-def increase_volume(data: Dict[str, Any]):
+async def increase_volume(data: Dict[str, Any]):
     serializer: VolumeIncreaseSerializer = VolumeIncreaseSerializer(**data)
 
-    VolumeService.increase_volume(serializer)
+    await VolumeService.increase_volume(serializer)
 
 
 @AppInstances.event.on("decrease_volume")
-def decrease_volume(data: Dict[str, Any]):
+async def decrease_volume(data: Dict[str, Any]):
     serializer: VolumeDecreaseSerializer = VolumeDecreaseSerializer(**data)
 
-    VolumeService.decrease_volume(serializer)
+    await VolumeService.decrease_volume(serializer)
 
 
-@AppInstances.event.on("mute")
-def mute():
+@AppInstances.event.on("mute_volume")
+async def mute():
     serializer: VolumeMuteSerializer = VolumeMuteSerializer(mute=1)
 
-    VolumeService.mute(serializer)
+    await VolumeService.mute(serializer)
 
 
-@AppInstances.event.on("unmute")
-def unmute():
+@AppInstances.event.on("unmute_volume")
+async def unmute():
     serializer: VolumeMuteSerializer = VolumeMuteSerializer(mute=0)
 
-    VolumeService.mute(serializer)
+    await VolumeService.mute(serializer)

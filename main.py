@@ -7,12 +7,14 @@ async def main() -> None:
     from services.ai import AiService
     from utils.serializers import WitIntegrationSerializer
 
+    import controllers.event
+
     try:
         while True:
             voice_data: str = await AiService.async_capture_microphone_data()
 
-            wit_integration: WitIntegrationSerializer = await AiService.integrate_with_wit(
-                voice_data
+            wit_integration: WitIntegrationSerializer = (
+                await AiService.integrate_with_wit(voice_data)
             )
 
             AppInstances.event.emit(

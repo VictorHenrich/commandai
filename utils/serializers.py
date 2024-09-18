@@ -1,29 +1,52 @@
-from typing import Dict, Any
-from pydantic import BaseModel, field_validator
+from typing import Dict, Any, Union
+from pydantic import BaseModel, field_validator, model_validator
+
+from utils.settings import MAX_VALUE_NIRCMD_VOLUME
+from utils.common import AppCommon
 
 
 class BaseVolumeControlSerializer(BaseModel):
-    volume: float
+    volume: Union[int, str]
 
     component: str = ""
 
 
 class VolumeIncreaseSerializer(BaseVolumeControlSerializer):
     @field_validator("volume")
-    def validate_volume(cls, value: float) -> float:
-        if value < 0 or value == 0:
-            raise ValueError("Invalid value for increasing volume: {value}")
+    def validate_volume(cls, value: Union[int, str]) -> int:
+        try:
+            number: int = int(AppCommon.keep_only_numbers(value))
 
-        return value
+        except ValueError:
+            raise ValueError(f"The Value passed is invalid for numeric values.")
+
+        else:
+            if type(value) is str and "%" in value:
+                return (number / 100) * MAX_VALUE_NIRCMD_VOLUME
+
+            if number < 0:
+                number *= -1
+
+            return number
 
 
 class VolumeDecreaseSerializer(BaseVolumeControlSerializer):
     @field_validator("volume")
-    def validate_volume(cls, value: float) -> float:
-        if value > 0 or value == 0:
-            raise ValueError("Invalid value for decreasing volume: {value}")
+    def validate_volume(cls, value: Union[int, str]) -> int:
+        try:
+            number: int = int(AppCommon.keep_only_numbers(value))
 
-        return value
+        except ValueError:
+            raise ValueError(f"The Value passed is invalid for numeric values.")
+
+        else:
+            if type(value) is str and "%" in value:
+                number = (number / 100) * MAX_VALUE_NIRCMD_VOLUME
+
+            if number > 0:
+                number *= -1
+
+            return number
 
 
 class VolumeMuteSerializer(BaseModel):
@@ -32,7 +55,10 @@ class VolumeMuteSerializer(BaseModel):
     component: str = ""
 
     @field_validator("mute", mode="before")
-    def set_mute_as_integer(cls, value: bool) -> int:
+    def set_mute_as_integer(cls, value: Union[bool, int]) -> int:
+        if not isinstance(value, (bool, int)):
+            raise ValueError("Invalid value to mute/unmute volume.")
+
         return 1 if value else 0
 
 
@@ -40,3 +66,7 @@ class WitIntegrationSerializer(BaseModel):
     event_name: str
 
     event_data: Dict[str, Any]
+
+    @model_validator(mode="after")
+    def handle_wit_integration_data(cls, values: Dict[str, Any]):
+        pass

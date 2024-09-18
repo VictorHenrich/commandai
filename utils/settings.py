@@ -2,7 +2,9 @@ from pathlib import Path
 import os
 
 
-NIRCMD_PATH: Path = Path(__file__) / ".." / "binaries" / "nircmd"
+NIRCMD_PATH: Path = Path(__file__).parent / ".." / "binaries" / "nircmd.exe"
+
+MAX_VALUE_NIRCMD_VOLUME: int = int(os.environ.get("MAX_VALUE_NIRCMD_VOLUME", "65535"))
 
 WIT_BASE_URL: str = os.environ.get("WIT_BASE_URL", "https://api.wit.ai")
 WIT_SECRET_KEY: str = os.environ.get(

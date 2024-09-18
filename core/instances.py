@@ -1,8 +1,8 @@
-from pyee import EventEmitter
+from pyee.asyncio import AsyncIOEventEmitter
 from typer import Typer
 
 
 class AppInstances:
-    event: EventEmitter = EventEmitter()
+    event: AsyncIOEventEmitter = AsyncIOEventEmitter()
 
     cli: Typer = Typer()
