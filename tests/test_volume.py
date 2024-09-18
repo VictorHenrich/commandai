@@ -1,3 +1,4 @@
+from typing import Any
 from unittest import IsolatedAsyncioTestCase
 from unittest.mock import Mock
 
@@ -60,7 +61,7 @@ class VolumeServiceTestCase(IsolatedAsyncioTestCase):
         with self.assertRaisesRegex(
             expected_exception=ValueError, expected_regex=error_message
         ):
-            increase_volume_data: VolumeIncreaseSerializer = VolumeIncreaseSerializer(
+            increase_volume_data: VolumeDecreaseSerializer = VolumeDecreaseSerializer(
                 volume=error_value
             )
 
@@ -77,7 +78,7 @@ class VolumeServiceTestCase(IsolatedAsyncioTestCase):
         await VolumeService.mute(increase_volume_data)
 
     async def test_mute_volume_with_validation_error(self) -> None:
-        error_value: str = "VALOR INVÁLIDO"
+        error_value: Any = "VALOR INVÁLIDO"
 
         error_message: str = r"Invalid value to mute/unmute volume."
 
@@ -101,7 +102,7 @@ class VolumeServiceTestCase(IsolatedAsyncioTestCase):
         await VolumeService.mute(increase_volume_data)
 
     async def test_unmute_volume_with_validation_error(self) -> None:
-        error_value: str = "VALOR INVÁLIDO"
+        error_value: Any = "VALOR INVÁLIDO"
 
         error_message: str = r"Invalid value to mute/unmute volume."
 
