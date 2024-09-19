@@ -1,11 +1,8 @@
-from typing import Type
 from enum import Enum
 
 
 class AppEventTypes:
     class Volume(Enum):
-        __EVENT_NAME__ = "volume"
-
         INCREASE = "increase_volume"
 
         DECREASE = "decrease_volume"
@@ -15,16 +12,16 @@ class AppEventTypes:
         UNMUTE = "increase_volume"
 
     class Browser(Enum):
-        __EVENT_NAME__ = "browser"
+        pass
 
     @classmethod
-    def get_event_by_name(cls, event_name: str) -> Type[Enum]:
+    def get_event_by_name(cls, event_name: str) -> Enum:
         for value in vars(cls).values():
-            if (
-                isinstance(value, type)
-                and hasattr(value, "__EVENT_NAME__")
-                and value.__EVENT_NAME___.lower() == event_name.lower()
-            ):
-                return value
+            if isinstance(value, type) and issubclass(value, Enum):
+                try:
+                    return value(event_name)
+
+                except ValueError:
+                    continue
 
         raise Exception(f"Event '{event_name}' not found!")
