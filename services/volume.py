@@ -1,4 +1,4 @@
-from utils.serializers import (
+from serializers.volume import (
     VolumeDecreaseSerializer,
     VolumeMuteSerializer,
     VolumeIncreaseSerializer,

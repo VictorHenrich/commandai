@@ -9,7 +9,7 @@ class AppEventTypes:
 
         MUTE = "mute_volume"
 
-        UNMUTE = "increase_volume"
+        UNMUTE = "unmute_volume"
 
     class Browser(Enum):
         pass

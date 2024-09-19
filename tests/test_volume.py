@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 from unittest.mock import Mock
 
 from services.volume import VolumeService
-from utils.serializers import (
+from serializers.volume import (
     VolumeIncreaseSerializer,
     VolumeDecreaseSerializer,
     VolumeMuteSerializer,

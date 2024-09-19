@@ -5,7 +5,7 @@ import speech_recognition as sr
 
 from services.ai import AiService
 from utils.types import AppEventTypes
-from utils.serializers import (
+from serializers.ai import (
     WitIntegrationParamsSerializer,
     WitIntegrationResultSerializer,
 )

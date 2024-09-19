@@ -1,5 +1,5 @@
-from typing import Dict, Any, Union
-from pydantic import BaseModel, field_validator, model_validator
+from typing import Union
+from pydantic import BaseModel, field_validator
 
 from utils.settings import MAX_VALUE_NIRCMD_VOLUME
 from utils.common import AppCommon
@@ -60,17 +60,3 @@ class VolumeMuteSerializer(BaseModel):
             raise ValueError("Invalid value to mute/unmute volume.")
 
         return 1 if value else 0
-
-
-class WitIntegrationParamsSerializer(BaseModel):
-    message: str
-
-
-class WitIntegrationResultSerializer(BaseModel):
-    event_name: str
-
-    event_data: Dict[str, Any]
-
-    @model_validator(mode="before")
-    def handle_wit_integration_data(cls, values: Any) -> Any:
-        return values

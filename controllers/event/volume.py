@@ -3,7 +3,7 @@ from typing import Dict, Any
 from core.instances import AppInstances
 from services.volume import VolumeService
 from utils.types import AppEventTypes
-from utils.serializers import (
+from serializers.volume import (
     VolumeDecreaseSerializer,
     VolumeIncreaseSerializer,
     VolumeMuteSerializer,

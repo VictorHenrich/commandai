@@ -5,7 +5,7 @@ import asyncio
 async def main() -> None:
     from core.instances import AppInstances
     from services.ai import AiService
-    from utils.serializers import (
+    from serializers.ai import (
         WitIntegrationResultSerializer,
         WitIntegrationParamsSerializer,
     )

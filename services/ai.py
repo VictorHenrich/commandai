@@ -13,7 +13,7 @@ import os
 import logging
 
 from utils.settings import WIT_BASE_URL, WIT_SECRET_KEY, GOOGLE_API_KEY
-from utils.serializers import (
+from serializers.ai import (
     WitIntegrationResultSerializer,
     WitIntegrationParamsSerializer,
 )
