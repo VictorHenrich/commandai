@@ -16,15 +16,15 @@ class WitIntegrationResultSerializer(BaseModel):
 
     @model_validator(mode="before")
     def handle_wit_integration_data(cls, values: Any) -> Any:
-        intent: str = values["intents"][0]
+        intent: str = values["intents"][0]["name"]
 
         entities: Dict[str, Any] = values["entities"]
 
-        cls.event_name = AppEventTypes.get_event_by_name(intent)
+        event_name: Enum = AppEventTypes.get_event_by_name(intent)
 
-        cls.event_data = {
-            prop.split(":")[0]: entitie_data.get("body")
+        event_data: Dict[str, Any] = {
+            prop.split(":")[0]: entitie_data[0].get("body")
             for prop, entitie_data in entities.items()
         }
 
-        return values
+        return {"event_name": event_name, "event_data": event_data}

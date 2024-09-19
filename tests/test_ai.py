@@ -24,7 +24,7 @@ class AiServiceTestCase(IsolatedAsyncioTestCase):
         )
 
         self.assertEqual(
-            wit_integration_response.event_name, AppEventTypes.Volume.INCREASE.value
+            wit_integration_response.event_name, AppEventTypes.Volume.INCREASE
         )
 
     @patch("services.ai.Microphone", new=lambda *_: sr.AudioFile(str(AUDIO_PATH)))

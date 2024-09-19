@@ -12,7 +12,9 @@ class AppEventTypes:
         UNMUTE = "unmute_volume"
 
     class Browser(Enum):
-        pass
+        OPEN = "open_browser"
+
+        NAVIGATE = "navigate_browser"
 
     @classmethod
     def get_event_by_name(cls, event_name: str) -> Enum:
