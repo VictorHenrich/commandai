@@ -1,9 +1,9 @@
-typer==0.12.5
-httpx==0.27.2
-python-dotenv==1.0.1
-pyee==12.0.0
-SpeechRecognition==3.10.4
-playwright==1.47.0
+typer
+httpx
+python-dotenv
+pyee
+SpeechRecognition
+playwright
 pydantic
 black
 google-cloud-speech
