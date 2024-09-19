@@ -5,7 +5,10 @@ import asyncio
 async def main() -> None:
     from core.instances import AppInstances
     from services.ai import AiService
-    from utils.serializers import WitIntegrationSerializer
+    from utils.serializers import (
+        WitIntegrationResultSerializer,
+        WitIntegrationParamsSerializer,
+    )
 
     import controllers.event
 
@@ -13,8 +16,12 @@ async def main() -> None:
         while True:
             voice_data: str = await AiService.async_capture_microphone_data()
 
-            wit_integration: WitIntegrationSerializer = (
-                await AiService.integrate_with_wit(voice_data)
+            integration_data: WitIntegrationParamsSerializer = (
+                WitIntegrationParamsSerializer(message=voice_data)
+            )
+
+            wit_integration: WitIntegrationResultSerializer = (
+                await AiService.integrate_with_wit(integration_data)
             )
 
             AppInstances.event.emit(

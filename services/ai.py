@@ -9,13 +9,34 @@ from speech_recognition import (
 import httpx
 import logging
 import asyncio
+import os
+import logging
 
-from utils.settings import WIT_BASE_URL, WIT_SECRET_KEY
-from utils.serializers import WitIntegrationSerializer
+from utils.settings import WIT_BASE_URL, WIT_SECRET_KEY, GOOGLE_API_KEY
+from utils.serializers import (
+    WitIntegrationResultSerializer,
+    WitIntegrationParamsSerializer,
+)
 
 
 class AiService:
     __recognizer: Recognizer = Recognizer()
+
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_API_KEY
+
+    @classmethod
+    def __recognize_with_whisper(cls, audio_data: AudioData) -> str:
+        return cls.__recognizer.recognize_whisper(audio_data, language="pt")
+
+    @classmethod
+    def __recognize_with_google(cls, audio_data: AudioData) -> str:
+        return cls.__recognizer.recognize_google_cloud(audio_data, language="pt-BR")
+
+    @classmethod
+    def __capture_audio_data(cls, source: Microphone) -> AudioData:
+        cls.__recognizer.adjust_for_ambient_noise(source)
+
+        return cls.__recognizer.listen(source)
 
     @classmethod
     def capture_microphone_data(cls) -> str:
@@ -23,13 +44,13 @@ class AiService:
             try:
                 logging.info("...Capturing Microphone Data...")
 
-                cls.__recognizer.adjust_for_ambient_noise(source)
+                audio_data: AudioData = cls.__capture_audio_data(source)
 
-                audio_data: AudioData = cls.__recognizer.listen(source)
+                message: str = cls.__recognize_with_whisper(audio_data)
 
-                return cls.__recognizer.recognize_google_cloud(
-                    audio_data, language="pt-BR"
-                )
+                logging.info(f"Speech to Text Message: {message}")
+
+                return message
 
             except UnknownValueError:
                 raise Exception("Unable to understand the audio!")
@@ -44,10 +65,12 @@ class AiService:
         )
 
     @staticmethod
-    async def integrate_with_wit(message: str) -> WitIntegrationSerializer:
+    async def integrate_with_wit(
+        data: WitIntegrationParamsSerializer,
+    ) -> WitIntegrationResultSerializer:
         wit_url: str = f"{WIT_BASE_URL}/message"
 
-        query_params: Dict[str, Any] = {"q": message}
+        query_params: Dict[str, Any] = {"q": data.message}
 
         async with httpx.AsyncClient(
             headers={"Authorization": f"Bearer {WIT_SECRET_KEY}"}
@@ -58,4 +81,6 @@ class AiService:
 
             response_data: Dict[str, Any] = response.json()
 
-            return WitIntegrationSerializer(**response_data)
+            logging.info(f"Wit Integration Response: {response_data}")
+
+            return WitIntegrationResultSerializer(**response_data)

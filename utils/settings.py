@@ -20,3 +20,8 @@ COMMAND_DECREASE_VOLUME: str = os.environ.get(
 )
 
 COMMAND_MUTE_VOLUME: str = os.environ.get("COMMAND_INCREASE_VOLUME", "mutesysvolume {}")
+
+
+GOOGLE_API_KEY: str = os.environ.get(
+    "GOOGLE_API_KEY", "AIzaSyD5JOwuQG3HJJmNYDQjgExgTHxvI7NWlKg"
+)

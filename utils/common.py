@@ -16,7 +16,6 @@ class AppCommon:
 
         return await event_loop.run_in_executor(None, cls.execute_command, command)
 
-    staticmethod
-
+    @staticmethod
     def keep_only_numbers(string: str) -> str:
         return re.sub(r"\D", "", string)

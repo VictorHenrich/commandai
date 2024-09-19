@@ -2,6 +2,7 @@ from typing import Dict, Any
 
 from core.instances import AppInstances
 from services.volume import VolumeService
+from utils.types import AppEventTypes
 from utils.serializers import (
     VolumeDecreaseSerializer,
     VolumeIncreaseSerializer,
@@ -9,28 +10,28 @@ from utils.serializers import (
 )
 
 
-@AppInstances.event.on("increase_volume")
+@AppInstances.event.on(AppEventTypes.Volume.INCREASE.value)
 async def increase_volume(data: Dict[str, Any]):
     serializer: VolumeIncreaseSerializer = VolumeIncreaseSerializer(**data)
 
     await VolumeService.increase_volume(serializer)
 
 
-@AppInstances.event.on("decrease_volume")
+@AppInstances.event.on(AppEventTypes.Volume.DECREASE.value)
 async def decrease_volume(data: Dict[str, Any]):
     serializer: VolumeDecreaseSerializer = VolumeDecreaseSerializer(**data)
 
     await VolumeService.decrease_volume(serializer)
 
 
-@AppInstances.event.on("mute_volume")
+@AppInstances.event.on(AppEventTypes.Volume.MUTE.value)
 async def mute():
     serializer: VolumeMuteSerializer = VolumeMuteSerializer(mute=1)
 
     await VolumeService.mute(serializer)
 
 
-@AppInstances.event.on("unmute_volume")
+@AppInstances.event.on(AppEventTypes.Volume.UNMUTE.value)
 async def unmute():
     serializer: VolumeMuteSerializer = VolumeMuteSerializer(mute=0)
 

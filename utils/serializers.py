@@ -15,14 +15,14 @@ class VolumeIncreaseSerializer(BaseVolumeControlSerializer):
     @field_validator("volume")
     def validate_volume(cls, value: Union[int, str]) -> int:
         try:
-            number: int = int(AppCommon.keep_only_numbers(value))
+            number: int = int(AppCommon.keep_only_numbers(str(value)))
 
         except ValueError:
             raise ValueError(f"The Value passed is invalid for numeric values.")
 
         else:
             if type(value) is str and "%" in value:
-                return (number / 100) * MAX_VALUE_NIRCMD_VOLUME
+                number = int((number / 100) * MAX_VALUE_NIRCMD_VOLUME)
 
             if number < 0:
                 number *= -1
@@ -34,14 +34,14 @@ class VolumeDecreaseSerializer(BaseVolumeControlSerializer):
     @field_validator("volume")
     def validate_volume(cls, value: Union[int, str]) -> int:
         try:
-            number: int = int(AppCommon.keep_only_numbers(value))
+            number: int = int(AppCommon.keep_only_numbers(str(value)))
 
         except ValueError:
             raise ValueError(f"The Value passed is invalid for numeric values.")
 
         else:
             if type(value) is str and "%" in value:
-                number = (number / 100) * MAX_VALUE_NIRCMD_VOLUME
+                number = int((number / 100) * MAX_VALUE_NIRCMD_VOLUME)
 
             if number > 0:
                 number *= -1
@@ -62,11 +62,15 @@ class VolumeMuteSerializer(BaseModel):
         return 1 if value else 0
 
 
-class WitIntegrationSerializer(BaseModel):
+class WitIntegrationParamsSerializer(BaseModel):
+    message: str
+
+
+class WitIntegrationResultSerializer(BaseModel):
     event_name: str
 
     event_data: Dict[str, Any]
 
-    @model_validator(mode="after")
-    def handle_wit_integration_data(cls, values: Dict[str, Any]):
-        pass
+    @model_validator(mode="before")
+    def handle_wit_integration_data(cls, values: Any) -> Any:
+        return values
