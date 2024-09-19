@@ -12,7 +12,9 @@ class BaseVolumeControlSerializer(BaseModel):
 
     @model_validator(mode="before")
     def validate_model(cls, value: Dict[str, Any]):
-        if hasattr(value, "volume"):
+        if (isinstance(value, dict) and value.get("volume")) or hasattr(
+            value, "volume"
+        ):
             return value
 
         return {
