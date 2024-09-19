@@ -3,9 +3,7 @@ from enum import Enum
 
 class AppEventTypes:
     class Volume(Enum):
-        INCREASE = "increase_volume"
-
-        DECREASE = "decrease_volume"
+        ADJUST = "adjust_volume"
 
         MUTE = "mute_volume"
 

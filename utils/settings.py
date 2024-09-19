@@ -11,11 +11,7 @@ WIT_SECRET_KEY: str = os.environ.get(
     "WIT_SECRET_KEY", "6VOF7XPGB2MGV7UNFIJLULACRACK2T57"
 )
 
-COMMAND_INCREASE_VOLUME: str = os.environ.get(
-    "COMMAND_INCREASE_VOLUME", "setsysvolume {}"
-)
-
-COMMAND_DECREASE_VOLUME: str = os.environ.get(
+COMMAND_ADJUST_VOLUME: str = os.environ.get(
     "COMMAND_INCREASE_VOLUME", "setsysvolume {}"
 )
 

@@ -5,7 +5,7 @@ from utils.settings import MAX_VALUE_NIRCMD_VOLUME
 from utils.common import AppCommon
 
 
-class BaseVolumeControlSerializer(BaseModel):
+class VolumeAdjustSerializer(BaseModel):
     volume: Union[int, str]
 
     component: str = ""
@@ -21,9 +21,7 @@ class BaseVolumeControlSerializer(BaseModel):
             "volume": value["volume_value"],
             "component": value.get("volume_component", ""),
         }
-
-
-class VolumeIncreaseSerializer(BaseVolumeControlSerializer):
+    
     @field_validator("volume", mode="after")
     def validate_volume(cls, value: Union[int, str]) -> int:
         try:
@@ -35,28 +33,6 @@ class VolumeIncreaseSerializer(BaseVolumeControlSerializer):
         else:
             if type(value) is str and "%" in value:
                 number = int((number / 100) * MAX_VALUE_NIRCMD_VOLUME)
-
-            if number < 0:
-                number *= -1
-
-            return number
-
-
-class VolumeDecreaseSerializer(BaseVolumeControlSerializer):
-    @field_validator("volume")
-    def validate_volume(cls, value: Union[int, str]) -> int:
-        try:
-            number: int = int(AppCommon.keep_only_numbers(str(value)))
-
-        except ValueError:
-            raise ValueError(f"The Value passed is invalid for numeric values.")
-
-        else:
-            if type(value) is str and "%" in value:
-                number = int((number / 100) * MAX_VALUE_NIRCMD_VOLUME)
-
-            if number > 0:
-                number *= -1
 
             return number
 

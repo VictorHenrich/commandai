@@ -13,24 +13,24 @@ from utils.settings import WIT_BASE_URL
 from tests.common import RESOURCES_PATH
 
 
-AUDIO_PATH: Path = RESOURCES_PATH / "volume_increase_command.wav"
+AUDIO_PATH: Path = RESOURCES_PATH / "volume_adjust_command.wav"
 
 
 class AiServiceTestCase(IsolatedAsyncioTestCase):
     async def test_integrate_with_wit_with_success(self) -> None:
-        wit_integration_data: Mock = Mock(message="Eu quero aumentar o volume para 30%")
+        wit_integration_data: Mock = Mock(message="aumentar o volume para 30%")
 
         wit_integration_response: WitIntegrationResultSerializer = (
             await AiService.integrate_with_wit(wit_integration_data)
         )
 
         self.assertEqual(
-            wit_integration_response.event_name, AppEventTypes.Volume.INCREASE
+            wit_integration_response.event_name, AppEventTypes.Volume.ADJUST
         )
 
     async def test_integrate_with_wit_with_validation_success(self) -> None:
         wit_integration_data: WitIntegrationParamsSerializer = (
-            WitIntegrationParamsSerializer(message="Diminuir o volume para 30%")
+            WitIntegrationParamsSerializer(message="ajustar o volume para 30%")
         )
 
         wit_integration_response: WitIntegrationResultSerializer = (
@@ -38,7 +38,7 @@ class AiServiceTestCase(IsolatedAsyncioTestCase):
         )
 
         self.assertEqual(
-            wit_integration_response.event_name, AppEventTypes.Volume.DECREASE
+            wit_integration_response.event_name, AppEventTypes.Volume.ADJUST
         )
 
     async def test_integrate_with_wit_with_validation_error(self) -> None:

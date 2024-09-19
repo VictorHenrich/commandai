@@ -3,6 +3,7 @@ httpx
 python-dotenv
 pyee
 SpeechRecognition
+SpeechRecognition[whisper-local]
 playwright
 pydantic
 black

@@ -4,24 +4,16 @@ from core.instances import AppInstances
 from services.volume import VolumeService
 from utils.types import AppEventTypes
 from serializers.volume import (
-    VolumeDecreaseSerializer,
-    VolumeIncreaseSerializer,
+    VolumeAdjustSerializer,
     VolumeMuteSerializer,
 )
 
 
-@AppInstances.event.on(AppEventTypes.Volume.INCREASE.value)
+@AppInstances.event.on(AppEventTypes.Volume.ADJUST.value)
 async def increase_volume(data: Dict[str, Any]):
-    serializer: VolumeIncreaseSerializer = VolumeIncreaseSerializer(**data)
+    serializer: VolumeAdjustSerializer = VolumeAdjustSerializer(**data)
 
-    await VolumeService.increase_volume(serializer)
-
-
-@AppInstances.event.on(AppEventTypes.Volume.DECREASE.value)
-async def decrease_volume(data: Dict[str, Any]):
-    serializer: VolumeDecreaseSerializer = VolumeDecreaseSerializer(**data)
-
-    await VolumeService.decrease_volume(serializer)
+    await VolumeService.adjust_volume(serializer)
 
 
 @AppInstances.event.on(AppEventTypes.Volume.MUTE.value)
