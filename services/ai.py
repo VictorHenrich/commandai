@@ -79,6 +79,11 @@ class AiService:
                 wit_url, params=query_params, timeout=10
             )
 
+            if response.status_code >= 400:
+                raise Exception(
+                    "Integration with wit failed!\n" + f"Response: {response}"
+                )
+
             response_data: Dict[str, Any] = response.json()
 
             logging.info(f"Wit Integration Response: {response_data}")

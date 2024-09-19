@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import asyncio
+import logging
 
 
 async def main() -> None:
@@ -25,7 +26,7 @@ async def main() -> None:
             )
 
             AppInstances.event.emit(
-                wit_integration.event_name, wit_integration.event_data
+                wit_integration.event_name.value, wit_integration.event_data
             )
 
     except InterruptedError:
@@ -34,5 +35,7 @@ async def main() -> None:
 
 if __name__ == "__main__":
     load_dotenv()
+
+    logging.basicConfig(level=logging.INFO)
 
     asyncio.run(main())
