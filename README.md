@@ -73,7 +73,7 @@ Após a instalação do Python, é recomendável criar um ambiente virtual para 
 # Executando o projeto
 
 ## Forma manual
-Para executar o programa, é necessário que todos os passos anteriores, como a instalação do Python e a preparação dos pacotes, tenham sido concluídos. Se preferir, nos próximos tópicos, será demonstrada uma maneira mais simples e direta de realizar a execução utilizando os scripts inicializadores chamados *start_project*.
+Para executar o programa, é necessário que todos os passos anteriores, como a instalação do Python e a preparação dos pacotes, tenham sido concluídos. Se preferir, nos próximos tópicos, será demonstrada uma maneira mais simples e direta de realizar a execução utilizando os scripts inicializadores chamados **start_project**.
 
 ### Windows
 
@@ -95,7 +95,7 @@ Para executar o programa, é necessário que todos os passos anteriores, como a 
      ```
    - O programa deve se inicializar ao rodar.
 
-## Utilizando arquivo start_project
+## Utilizando arquivo *start_project*
 Este arquivo é responsável por verificar e criar um ambiente virtual do Python, além de instalar os pacotes necessários para a execução do projeto. Isso simplifica o processo de configuração e inicialização do projeto como um todo.
 
 
@@ -118,6 +118,9 @@ Este arquivo é responsável por verificar e criar um ambiente virtual do Python
 # Executando testes do projeto
 Este tutorial apresenta o procedimento para realizar os testes unitários da aplicação, utilizando a biblioteca *unittest*, nativa do Python. Para que os testes funcionem corretamente, é necessário que seu ambiente esteja devidamente configurado e pronto para a execução.
 
+## Forma Manual
+Para executar os testes do programa, é essencial que todos os passos anteriores, como a instalação do Python e a configuração dos pacotes, tenham sido concluídos. Nos próximos tópicos, você encontrará uma maneira mais simples e direta de rodar os testes, utilizando os scripts inicializadores chamados **start_tests**.
+
    **Executar todos os testes na pasta tests:**
    - No terminal, navegue até o diretório do seu projeto e execute:
      ```bash
@@ -136,3 +139,23 @@ Este tutorial apresenta o procedimento para realizar os testes unitários da apl
      python -m unittest discover -s tests -v`
      ```
    - A opção -v (verbose) irá mostrar mais detalhes sobre os testes aplicados
+
+  
+## Utilizando o arquivo *start_tests*
+Este arquivo verifica e cria o ambiente virtual do Python, além de instalar os pacotes necessários para a execução dos testes do projeto. Ele simplifica o processo de configuração e execução dos testes, tornando-o mais eficiente.
+
+### Windows
+
+   **Testando projeto:**
+   - Abra o Prompt de Comando (`cmd`), navegue até o diretório do seu projeto e execute.
+     ```bash
+        start_tests.cmd
+     ```
+
+### Linux
+
+   **Testando projeto:**
+   - No terminal, navegue até o diretório do seu projeto e execute:
+     ```bash
+     source start_tests.sh
+     ```
