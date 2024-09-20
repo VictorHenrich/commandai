@@ -1,5 +1,5 @@
 # COMMANDAI
-Sistema de gerenciamento de Sistema Operacional por comandos de voz, utilizando Inteligência Artificial para controle eficiente e automatizado.
+**CommandAI** é um sistema de gerenciamento de operações por meio de comandos de voz, que utiliza Inteligência Artificial para oferecer um controle eficiente e automatizado. Esta ferramenta visa simplificar a interação com sistemas operacionais, permitindo uma experiência mais intuitiva e dinâmica.
 
 
 # Instalação do Python
