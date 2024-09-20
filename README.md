@@ -119,10 +119,10 @@ Este arquivo é responsável por verificar / criar um ambiente virtual do python
 Este tutorial irá mostrar como realizar os testes unitários da aplicação. Para este projeto, foi utilizado a biblioteca unittest nativa do python. Para os testes funcionarem, você precisará estar com seu ambiente preparado e pronto para execução.
 
 ## Para executar todos os testes na pasta tests, utilize o seguinte comando:
-```python -m unittest discover -s tests```
+   ```python -m unittest discover -s tests```
 
 ## Para executar um teste específico, você pode usar:
-```python -m unittest tests.test_exemplo```
+   ```python -m unittest tests.test_exemplo```
 
 ## Se você precisar de mais detalhes sobre falhas, pode executar os testes com a opção -v (verbose):
-```python -m unittest discover -s tests -v```
+   ```python -m unittest discover -s tests -v```
