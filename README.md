@@ -149,7 +149,7 @@ Este arquivo verifica e cria o ambiente virtual do Python, além de instalar os 
    **Testando projeto:**
    - Abra o Prompt de Comando (`cmd`), navegue até o diretório do seu projeto e execute.
      ```bash
-        start_tests.cmd
+      start_tests.cmd
      ```
 
 ### Linux
