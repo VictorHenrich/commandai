@@ -77,7 +77,7 @@ Para executar o programa, é necessário que todos os passos anteriores, como a 
 
 ### Windows
 
-1. **Execução do programa:**
+   **Execução do programa:**
    - Abra o Prompt de Comando (`cmd`).
    - Digite o seguinte comando:
      ```bash
@@ -88,7 +88,7 @@ Para executar o programa, é necessário que todos os passos anteriores, como a 
 
 ### Linux
 
-1. **Execução do programa:**
+   **Execução do programa:**
    - Abra um terminal e execute:
      ```bash
      python3 main.py
@@ -96,27 +96,27 @@ Para executar o programa, é necessário que todos os passos anteriores, como a 
    - O programa deve se inicializar ao rodar.
 
 ## Utilizando arquivo start_project
-Este arquivo é responsável por verificar / criar um ambiente virtual do python e realizar as devidas instalações dos pacotes necessários para execução do projeto. Isso irá facilitar o processo de criação e inicialização do projeto como um todo.
+Este arquivo é responsável por verificar e criar um ambiente virtual do Python, além de instalar os pacotes necessários para a execução do projeto. Isso simplifica o processo de configuração e inicialização do projeto como um todo.
 
 
 ### Windows
 
-- Abra o Prompt de Comando (`cmd`), navegue até o diretório do seu projeto e execute.
+   **Inicializando projeto:**
+   - Abra o Prompt de Comando (`cmd`), navegue até o diretório do seu projeto e execute.
      ```bash
         start_project.cmd
      ```
 
 ### Linux
 
-1. **Inicializando projeto:**
+   **Inicializando projeto:**
    - No terminal, navegue até o diretório do seu projeto e execute:
      ```bash
      source start_project.sh
      ```
 
 # Executando testes do projeto
-
-Este tutorial irá mostrar como realizar os testes unitários da aplicação. Para este projeto, foi utilizado a biblioteca unittest nativa do python. Para os testes funcionarem, você precisará estar com seu ambiente preparado e pronto para execução.
+Este tutorial apresenta o procedimento para realizar os testes unitários da aplicação, utilizando a biblioteca *unittest*, nativa do Python. Para que os testes funcionem corretamente, é necessário que seu ambiente esteja devidamente configurado e pronto para a execução.
 
    **Executar todos os testes na pasta tests:**
    - No terminal, navegue até o diretório do seu projeto e execute:
