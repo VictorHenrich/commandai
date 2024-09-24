@@ -1,4 +1,4 @@
-ENV_DIR="env"
+ENV_DIR="venv-lin"
 
 if ! command -v python3 &> /dev/null; then
     echo "Python não está instalado. Instale o Python 3 antes de continuar."
@@ -22,4 +22,3 @@ else
 fi
 
 echo "Ambiente pronto!"
-echo "...Inicializando projeto..."
